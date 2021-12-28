@@ -28,7 +28,7 @@ function work(input) {
                 sha256.update(inputString);
 
                 var hash = sha256.digest('hex');
-                if (hash.slice(0, 2) === '000') {
+                if (hash.slice(0, 2) === '00') {
                         console.log("String: " + inputString);
                         console.log("Hash found: " + hash);
                         return nonce;
