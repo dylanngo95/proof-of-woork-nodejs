@@ -14,25 +14,27 @@ function djb2(str, size) {
 
 class Bloom {
 
-  filter; // filter array
-  encode_size = 8; // once element have 8 bit
+  filter; // filter Byte array
+  encode_size = 8; // once item have 8 bit, it's mean a byte
   size; // array size
   n; // number of element
 
   constructor(size, n) {
     this.n = n;
-    this.size = size;
-
-    const encodeSize = Math.ceil(size / this.encode_size);
-    this.filter = new Uint8Array(encodeSize);
+    this.size = Math.ceil(size / this.encode_size);
+    this.filter = new Uint8Array(this.size);
 
   }
 
   add(str) {
-    let tmp0 = 1 << 2;
-    const pos = djb2(str, this.size);
-    this.filter[pos] = 1;
+    const positionBit = djb2(str, this.size);
+    const positionByte = Math.floor(positionBit / this.encode_size);
+    let value = this.filter[positionByte];
     let tmp = 0;
+  }
+
+  change() {
+
   }
 
   check(str) {
